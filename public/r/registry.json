@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry.json",
+  "name": "test-registry-dano",
+  "homepage": "https://dano-registry.vercel.app/",
+  "items": [
+    {
+      "name": "action-button",
+      "type": "registry:component",
+      "title": "Boton de acción",
+      "description": "Un botón para ejecutar acciones capaz de manejar confirmación y errores.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "dependencies": ["lucide-vue-next", "vue-sonner"],
+      "registryDependencies": ["button", "spinner", "dialog", "sonner"],
+      "files": [
+        {
+          "path": "app/registry/action-button/ActionButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/action-button/useConfirmAction.ts",
+          "type": "registry:hook"
+        }
+      ]
+    }
+  ]
+}
