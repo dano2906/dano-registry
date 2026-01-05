@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import ActionButton from "~/registry/action-button/ActionButton.vue";
-import { Plus } from "lucide-vue-next";
+import { Plus } from 'lucide-vue-next'
 
 definePageMeta({
-  layout: "default",
-  name: "index",
-});
+  layout: 'default',
+  name: 'index',
+})
 
-const actionError = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return { ok: false, message: "Something went wrong" };
-};
+async function actionError() {
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  return { ok: false, message: 'Something went wrong' }
+}
 
-const actionSuccess = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return { ok: true };
-};
+async function actionSuccess() {
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  return { ok: true }
+}
 </script>
 
 <template>
@@ -28,25 +27,38 @@ const actionSuccess = async () => {
       />
       <div class="flex flex-wrap items-center justify-center gap-0.5">
         <ActionButton :action="actionError" require-are-you-sure>
-          <template #text>With Dialog with Error</template>
+          <template #text>
+            With Dialog with Error
+          </template>
           <template #icon>
             <Plus />
           </template>
         </ActionButton>
         <ActionButton :action="actionSuccess" require-are-you-sure>
-          <template #text>With Dialog without Error</template>
+          <template #text>
+            With Dialog without Error
+          </template>
           <template #icon>
             <Plus />
           </template>
         </ActionButton>
         <ActionButton :action="actionError">
-          <template #text>Without Dialog with Error</template>
+          <template #text>
+            Without Dialog with Error
+          </template>
           <template #icon>
             <Plus />
           </template>
         </ActionButton>
         <ActionButton :action="actionSuccess">
-          <template #text>Without Dialog without Error</template>
+          <template #text>
+            Without Dialog without Error
+          </template>
+          <template #icon>
+            <Plus />
+          </template>
+        </ActionButton>
+        <ActionButton :action="actionSuccess">
           <template #icon>
             <Plus />
           </template>
