@@ -9,9 +9,24 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ["shadcn-nuxt"],
+  modules: ["shadcn-nuxt", "@nuxt/fonts"],
   shadcn: {
     prefix: "",
     componentDir: "@/components/ui",
+  },
+  fonts: {
+    families: [
+      {
+        name: "Inter",
+        provider: "google",
+        preload: true,
+        weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+        styles: ["normal"],
+        display: "swap",
+        fallbacks: ["system-ui"],
+        global: true,
+      },
+    ],
+    devtools: true,
   },
 });
