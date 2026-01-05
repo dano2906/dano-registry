@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ['shadcn-nuxt', '@nuxt/fonts'],
+  modules: ['shadcn-nuxt', '@nuxt/fonts', '@nuxtjs/color-mode'],
   shadcn: {
     prefix: '',
     componentDir: '@/components/ui',
