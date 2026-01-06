@@ -6,8 +6,9 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="w-full py-4 space-y-4">
+  <main class="w-full py-4 space-y-14">
     <SectionsActionButton />
     <SectionsInputPassword />
+    <SectionsLoadingSwap />
   </main>
 </template>
