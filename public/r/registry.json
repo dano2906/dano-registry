@@ -21,6 +21,21 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "input-password",
+      "type": "registry:component",
+      "title": "Campo de texto para mostrar/ocultar contraseña",
+      "description": "Un campo de texto con un boton para mostrar/ocultar la contraseña.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "dependencies": ["lucide-vue-next"],
+      "registryDependencies": ["input-group"],
+      "files": [
+        {
+          "path": "app/registry/input-password/InputPassword.vue",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
