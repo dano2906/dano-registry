@@ -26,7 +26,7 @@ const registryDependencies = [
 <template>
   <PartialsSection component-name="action-button" description="Un botón para ejecutar acciones capaz de manejar confirmación y errores." title="Boton de acción" :dependencies :registry-dependencies>
     <template #example>
-      <div class="flex flex-wrap items-center justify-center gap-0.5">
+      <div class="flex flex-wrap items-center justify-start gap-0.5">
         <ActionButton :action="actionError" require-are-you-sure>
           <template #text>
             With Dialog with Error
