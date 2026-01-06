@@ -9,7 +9,7 @@
       "title": "Boton de acción",
       "description": "Un botón para ejecutar acciones capaz de manejar confirmación y errores.",
       "author": "Danilo León <dlg9806@gmail.com>",
-      "dependencies": ["lucide-vue-next", "vue-sonner"],
+      "dependencies": ["vue-sonner"],
       "registryDependencies": ["button", "spinner", "dialog", "sonner"],
       "files": [
         {
@@ -28,11 +28,24 @@
       "title": "Campo de texto para mostrar/ocultar contraseña",
       "description": "Un campo de texto con un boton para mostrar/ocultar la contraseña.",
       "author": "Danilo León <dlg9806@gmail.com>",
-      "dependencies": ["lucide-vue-next"],
       "registryDependencies": ["input-group"],
       "files": [
         {
           "path": "app/registry/input-password/InputPassword.vue",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "loading-swap",
+      "type": "registry:component",
+      "title": "Envoltorio para manejar estados de carga",
+      "description": "Envoltorio para manejar estados de carga sin cambiar las dimensiones del componente.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["spinner"],
+      "files": [
+        {
+          "path": "app/registry/loading-swap/LoadingSwap.vue",
           "type": "registry:ui"
         }
       ]

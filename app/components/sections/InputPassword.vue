@@ -5,14 +5,12 @@ const pass = ref('')
 </script>
 
 <template>
-  <section class="w-full space-y-4">
-    <PartialsTypography variant="h2" text="Input password" />
-    <PartialsSnippet
-      code="pnpm dlx shadcn-vue@latest add https://dano-registry.vercel.app/r/input-password.json"
-    />
-    <div class="flex flex-row flex-wrap items-center justify-start gap-2">
-      <PartialsTypography variant="span" :text="`Su contraseña es: ${pass}`" />
-      <InputPassword v-model="pass" placeholder="Password" class="max-w-xs" />
-    </div>
-  </section>
+  <PartialsSection component-name="input-password" description="Un campo de texto con un boton para mostrar/ocultar la contraseña." title="Input de contraseña" :registry-dependencies="['input-group']">
+    <template #example>
+      <div class="flex flex-row flex-wrap items-center justify-start gap-2">
+        <PartialsTypography variant="span" :text="`Su contraseña es: ${pass}`" />
+        <InputPassword v-model="pass" placeholder="Password" class="max-w-xs" />
+      </div>
+    </template>
+  </PartialsSection>
 </template>

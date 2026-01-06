@@ -1,5 +1,5 @@
 ✅ Action Button
 ✅ Password input
-⏱️ Loading Swap
+✅ Loading Swap
 ⏱️ Number input
 ⏱️ Multiselect

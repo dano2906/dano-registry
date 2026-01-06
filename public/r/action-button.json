@@ -6,7 +6,6 @@
   "author": "Danilo León <dlg9806@gmail.com>",
   "description": "Un botón para ejecutar acciones capaz de manejar confirmación y errores.",
   "dependencies": [
-    "lucide-vue-next",
     "vue-sonner"
   ],
   "registryDependencies": [
