@@ -10,5 +10,6 @@ definePageMeta({
     <SectionsActionButton />
     <SectionsInputPassword />
     <SectionsLoadingSwap />
+    <SectionsNumberInput />
   </main>
 </template>

@@ -49,6 +49,24 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "number-input",
+      "type": "registry:component",
+      "title": "Input numérico",
+      "description": "Input numérico que controla valores inválidos.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["input"],
+      "files": [
+        {
+          "path": "app/registry/number-input/NumberInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/number-input/InputGroupNumberInput.vue",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
