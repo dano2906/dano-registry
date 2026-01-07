@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Dependency } from '#shared/app'
-
 const { title, description, componentName, dependencies = [], registryDependencies = [] } = defineProps<{
   title: string
   description: string

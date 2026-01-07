@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import Button from "@/components/ui/button/Button.vue";
-import Spinner from "@/components/ui/spinner/Spinner.vue";
+import Button from '@/components/ui/button/Button.vue'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { useConfirmAction } from "@/registry/action-button/useConfirmAction";
+} from '@/components/ui/dialog'
+import Spinner from '@/components/ui/spinner/Spinner.vue'
+import { useConfirmAction } from '@/registry/action-button/useConfirmAction'
 
-type ActionResult = { ok: true } | { ok: false; message?: string };
+type ActionResult = { ok: true } | { ok: false, message?: string }
 
-type MaybePromise<T> = T | Promise<T>;
+type MaybePromise<T> = T | Promise<T>
 
 interface Props<T extends ActionResult = ActionResult> {
-  action(): MaybePromise<T>;
-  requireAreYouSure?: boolean;
-  couldCloseAutomatically?: boolean;
+  action: () => MaybePromise<T>
+  requireAreYouSure?: boolean
+  couldCloseAutomatically?: boolean
   toastOptions?: {
-    position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
-  };
+    position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  }
   dialogOptions?: {
-    cancelButtonText?: string;
-    confirmButtonText?: string;
-  };
+    cancelButtonText?: string
+    confirmButtonText?: string
+  }
 }
 
 const {
@@ -33,32 +33,27 @@ const {
   requireAreYouSure = false,
   couldCloseAutomatically = true,
   toastOptions = {
-    position: "bottom-right",
+    position: 'bottom-right',
   },
   dialogOptions = {
-    cancelButtonText: "Cancelar",
-    confirmButtonText: "Confirmar",
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Confirmar',
   },
-} = defineProps<Props>();
+} = defineProps<Props>()
 
-const emit = defineEmits<{
-  success: [ActionResult];
-  error: [unknown];
-}>();
-
-const { isLoading, openDialog, onPrimaryClick, onConfirm, onCancel } =
-  useConfirmAction(action, {
+const { isLoading, openDialog, onPrimaryClick, onConfirm, onCancel }
+  = useConfirmAction(action, {
     requireAreYouSure,
     couldCloseAutomatically,
     toastOptions,
-  });
+  })
 </script>
 
 <template>
-  <Button @click="onPrimaryClick" :disabled="isLoading">
+  <Button :disabled="isLoading" @click="onPrimaryClick">
     <slot name="text" />
     <Spinner v-if="isLoading && !requireAreYouSure" />
-    <slot name="icon" v-else />
+    <slot v-else name="icon" />
   </Button>
   <Dialog v-model:open="openDialog">
     <DialogContent>
@@ -70,10 +65,10 @@ const { isLoading, openDialog, onPrimaryClick, onConfirm, onCancel } =
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>
-        <Button @click="onCancel" variant="secondary" class="mr-2">
+        <Button variant="secondary" class="mr-2" @click="onCancel">
           {{ dialogOptions?.cancelButtonText ?? "Cancelar" }}
         </Button>
-        <Button @click="onConfirm" variant="destructive" class="min-w-28">
+        <Button variant="destructive" class="min-w-28" @click="onConfirm">
           <Spinner v-if="isLoading" />
           <span v-else>{{
             dialogOptions?.confirmButtonText ?? "Confirmar"

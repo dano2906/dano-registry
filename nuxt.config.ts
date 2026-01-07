@@ -8,7 +8,6 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-
   modules: ['shadcn-nuxt', '@nuxt/fonts', '@nuxtjs/color-mode'],
   shadcn: {
     prefix: '',

@@ -1,16 +1,16 @@
-import { ref } from "vue";
-import { toast } from "vue-sonner";
+import { ref } from 'vue'
+import { toast } from 'vue-sonner'
 
-export type ActionResult = { ok: true } | { ok: false; message?: string };
+export type ActionResult = { ok: true } | { ok: false, message?: string }
 
-type MaybePromise<T> = T | Promise<T>;
+type MaybePromise<T> = T | Promise<T>
 
 interface UseConfirmActionOptions {
-  requireAreYouSure?: boolean;
-  couldCloseAutomatically?: boolean;
+  requireAreYouSure?: boolean
+  couldCloseAutomatically?: boolean
   toastOptions?: {
-    position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
-  };
+    position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  }
 }
 
 export function useConfirmAction<T extends ActionResult>(
@@ -19,57 +19,60 @@ export function useConfirmAction<T extends ActionResult>(
     requireAreYouSure = false,
     couldCloseAutomatically = true,
     toastOptions = {
-      position: "bottom-right",
+      position: 'bottom-right',
     },
-  }: UseConfirmActionOptions = {}
+  }: UseConfirmActionOptions = {},
 ) {
-  const isLoading = ref(false);
-  const openDialog = ref(false);
+  const isLoading = ref(false)
+  const openDialog = ref(false)
 
-  const showError = (message = "Something went wrong") => {
-    toast.error(message, { position: toastOptions.position });
-  };
+  const showError = (message = 'Something went wrong') => {
+    toast.error(message, { position: toastOptions.position })
+  }
 
   const execute = async () => {
-    isLoading.value = true;
+    isLoading.value = true
 
     try {
-      const result = await action();
+      const result = await action()
 
       if (!result.ok) {
-        showError(result.message);
-        return;
+        showError(result.message)
+        return
       }
       if (openDialog.value && couldCloseAutomatically) {
-        openDialog.value = false;
+        openDialog.value = false
       }
 
-      return result;
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Something went wrong";
-
-      showError(message);
-    } finally {
-      isLoading.value = false;
+      return result
     }
-  };
+    catch (error) {
+      const message
+        = error instanceof Error ? error.message : 'Something went wrong'
+
+      showError(message)
+    }
+    finally {
+      isLoading.value = false
+    }
+  }
 
   const onPrimaryClick = () => {
     if (requireAreYouSure) {
-      openDialog.value = true;
-    } else {
-      execute();
+      openDialog.value = true
     }
-  };
+    else {
+      execute()
+    }
+  }
 
   const onConfirm = () => {
-    execute();
-  };
+    execute()
+  }
 
   const onCancel = () => {
-    openDialog.value = false;
-  };
+    openDialog.value = false
+  }
 
   return {
     isLoading,
@@ -77,5 +80,5 @@ export function useConfirmAction<T extends ActionResult>(
     onPrimaryClick,
     onConfirm,
     onCancel,
-  };
+  }
 }

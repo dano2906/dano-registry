@@ -11,5 +11,6 @@ definePageMeta({
     <SectionsInputPassword />
     <SectionsLoadingSwap />
     <SectionsNumberInput />
+    <SectionsMultiSelect />
   </main>
 </template>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Dependency } from '#shared/app'
-
 interface Props {
   dependencies: Dependency[]
   type?: 'shadcn' | 'lib'

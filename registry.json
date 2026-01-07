@@ -67,6 +67,36 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:component",
+      "title": "Select con posibilidad de seleccionar varias opciones",
+      "description": "Select con posibilidad de seleccionar varias opciones.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["select"],
+      "files": [
+        {
+          "path": "app/registry/multi-select/MultiSelect.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/multi-select/MultiSelectExpand.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/multi-select/MultiSelectItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/multi-select/MultiSelectValue.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/multi-select/useSelection.ts",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }
