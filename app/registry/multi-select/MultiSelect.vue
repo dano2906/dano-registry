@@ -44,7 +44,9 @@ watchEffect(() => {
           </MultiSelectValue>
         </template>
         <template v-else>
-          <PartialsTypography variant="span" :text="config.emptyMessage" />
+          <div>
+            <PartialsTypography variant="span" :text="config.emptyMessage" />
+          </div>
         </template>
       </div>
       <CommandInput :placeholder="config.searchPlaceholder" class="w-full" />
