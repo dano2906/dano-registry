@@ -1,7 +1,7 @@
 {
   "name": "dano-registry",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "private": true,
   "scripts": {
     "build": "nuxt build",

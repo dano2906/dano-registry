@@ -89,10 +89,10 @@ function selectCountry(c: Country) {
 
 <template>
   <div ref="target" class="relative w-full max-w-md">
-    <div class="flex h-auto items-center bg-secondary border border-primary/10 rounded-sm">
+    <div class="flex h-auto border items-center rounded-sm">
       <Button
         type="button"
-        class="flex items-center gap-2 px-4 py-3 rounded-none border-primary/10 hover:bg-primary/5 text-primary-foreground"
+        class="flex items-center gap-2 px-4 py-3 rounded-none"
         variant="ghost"
         @click="open = !open"
       >
@@ -100,6 +100,8 @@ function selectCountry(c: Country) {
           v-if="!specialCountryCodes.includes(selectedCountry.flag)"
           class="aspect-square w-6"
           :src="`https://flagsapi.com/${selectedCountry.flag}/flat/64.png`"
+          loading="lazy"
+          fetchpriority="auto"
         >
         <div v-else class="w-6 h-4 bg-white" />
         <span>{{ selectedCountry.code }}</span>
@@ -113,7 +115,7 @@ function selectCountry(c: Country) {
         inputmode="numeric"
         :placeholder
         :value="phone"
-        class="flex-1 bg-transparent px-4 py-3 rounded-r-sm border-none text-secondary-foreground outline-none ring-none placeholder:text-secondary-foreground/40"
+        class="flex-1 px-4 py-3 rounded-r-sm border-none outline-none ring-none"
         required
         @update:model-value="onInput"
       />
@@ -121,13 +123,13 @@ function selectCountry(c: Country) {
 
     <div
       v-if="open"
-      class="absolute z-50 mt-2 w-full bg-secondary border border-secondary-foreground/10 rounded-sm shadow-xl backdrop-blur-xl"
+      class="absolute bg-secondary/50 z-50 mt-2 w-full rounded-sm shadow-xl"
     >
       <div class="p-2">
         <Input
           v-model="search"
           placeholder="Buscar país"
-          class="w-full px-3 py-2 bg-secondary-foreground/5 rounded-sm text-primary-foreground outline-none placeholder:text-secondary-foreground/60"
+          class="w-full px-3 py-2 rounded-sm outline-none"
         />
       </div>
 
@@ -137,13 +139,15 @@ function selectCountry(c: Country) {
           :key="c.id"
           role="option"
           variant="ghost"
-          class="w-full flex items-center gap-3 px-4 py-2 text-sm text-secondary-foreground/70 hover:bg-secondary/80 transition"
+          class="w-full flex items-center gap-3 px-4 py-2 text-sm transition"
           @click="selectCountry(c)"
         >
           <img
             v-if="!specialCountryCodes.includes(c.flag)"
             :src="`https://flagsapi.com/${c.flag}/flat/64.png`"
             class="aspect-square w-6"
+            loading="lazy"
+            fetchpriority="auto"
           >
           <div v-else class="w-6 h-4 bg-white" />
           <span class="flex-1 text-left">{{ c.name }}</span>
