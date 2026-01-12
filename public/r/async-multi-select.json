@@ -1,0 +1,31 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "async-multi-select",
+  "type": "registry:component",
+  "title": "Select con posibilidad de seleccionar varias opciones",
+  "author": "Danilo León <dlg9806@gmail.com>",
+  "description": "Select con posibilidad de seleccionar varias opciones desde una url asíncronamente",
+  "registryDependencies": [
+    "command",
+    "button",
+    "https://https://dano-registry.vercel.app/r/typhography.json",
+    "https://https://dano-registry.vercel.app/r/loading-swap.json"
+  ],
+  "files": [
+    {
+      "path": "app/registry/async-multi-select/AsyncMultiSelect.vue",
+      "content": "<script setup lang=\"ts\" generic=\"T extends Record<PropertyKey, any>\">\nimport { Check } from 'lucide-vue-next'\nimport { Command, CommandEmpty, CommandInput, CommandList } from '@/components/ui/command'\nimport Typography from '@/registry/typhography/Typography.vue'\nimport AsyncMultiSelectActions from './AsyncMultiSelectActions.vue'\nimport AsyncMultiSelectValue from './AsyncMultiSelectValue.vue'\n\nconst { url, sourceKey, k, v, config = {\n  emptyMessage: 'Seleccione una o varias opciones',\n  emptySearchMessage: 'No se encontraron resultados',\n  searchPlaceholder: 'Buscar...',\n} } = defineProps<{\n  url: string\n  sourceKey?: string\n  k: keyof T\n  v: keyof T\n  config?: {\n    emptyMessage: string\n    emptySearchMessage: string\n    searchPlaceholder: string\n  }\n}>()\n\nconst field = defineModel<T[]>({\n  default: () => [],\n})\n\nconst data = ref<T[]>([])\nconst isLoading = ref(false)\nconst expanded = ref(false)\nconst isAllSelected = computed(() => field.value.length === data.value.length)\n\nfunction onMark(mark: boolean) {\n  if (mark === true) {\n    field.value = data.value\n  }\n  else {\n    field.value = []\n  }\n}\n\nfunction onSelect(item: T) {\n  const index = field.value.findIndex(i => i[k] === item[k])\n  if (index !== -1) {\n    field.value.splice(index, 1)\n    return\n  }\n  field.value.push(item)\n}\n\nfunction onRemove(item: T) {\n  const index = field.value.findIndex(i => i[k] === item[k])\n  if (index !== -1) {\n    field.value.splice(index, 1)\n  }\n}\n\nonMounted(async () => {\n  try {\n    isLoading.value = true\n    const res = await fetch(url)\n    const json = await res.json()\n    if (sourceKey) {\n      data.value = json[sourceKey]\n      return\n    }\n    data.value = json as T[]\n  }\n  catch (error) {\n    console.error(error)\n  }\n  finally {\n    isLoading.value = false\n  }\n})\n</script>\n\n<template>\n  <LoadingSwap :is-loading=\"data.length === 0 || isLoading\" class=\"bg-muted rounded-sm min-h-92\">\n    <Command class=\"rounded-sm\">\n      <div class=\"w-full py-1.5 relative px-2 border-b border-primary-foreground/10 flex items-center justify-start gap-2 flex-wrap\" :class=\"[expanded ? 'max-h-auto' : 'max-h-9 overflow-hidden']\">\n        <template v-if=\"field.length > 0\">\n          <AsyncMultiSelectValue v-for=\"(item, index) in field\" :key=\"index\" :v :item @on-remove=\"onRemove(item)\" />\n          <AsyncMultiSelectActions v-model=\"expanded\" :selected=\"field.length\" :marked=\"isAllSelected\" @mark=\"onMark\" />\n        </template>\n        <template v-else>\n          <div>\n            <Typography variant=\"span\" :text=\"config.emptyMessage\" />\n          </div>\n        </template>\n      </div>\n      <CommandInput :placeholder=\"config.searchPlaceholder\" class=\"w-full\" />\n      <CommandList>\n        <CommandEmpty>{{ config.emptySearchMessage }}</CommandEmpty>\n        <CommandGroup class=\"space-y-1\">\n          <CommandItem v-for=\"item in data\" :key=\"item[k]\" :value=\"item[v]\" class=\"min-h-7\" @select=\"onSelect(item)\">\n            <Check v-if=\"field.some(i => i[k] === item[k])\" class=\"text-muted-foreground\" />\n            <Typography variant=\"span\" :text=\"item[v]\" :class=\"[field.some(i => i[k] === item[k]) ? 'ml-0' : 'ml-6']\" />\n          </CommandItem>\n        </CommandGroup>\n      </CommandList>\n    </Command>\n  </LoadingSwap>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "app/registry/async-multi-select/AsyncMultiSelectValue.vue",
+      "content": "<script setup lang=\"ts\" generic=\"T extends Record<PropertyKey, any>\">\nimport { X } from 'lucide-vue-next'\nimport { Button } from '@/components/ui/button'\n\nconst { item, withRemove = true } = defineProps<{\n  item: T\n  v: keyof T\n  withRemove?: boolean\n}>()\n\nconst emit = defineEmits<{\n  (e: 'onRemove'): void\n}>()\n</script>\n\n<template>\n  <Button class=\"flex items-center justify-between gap-2 rounded-full text-xs p-0 m-0 h-6  max-w-full\" size=\"sm\" @click=\"emit('onRemove')\">\n    <span class=\"truncate\">{{ item[v] }}</span>\n    <X v-if=\"withRemove\" class=\"text-primary-foreground cursor-pointer\" />\n  </Button>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "app/registry/async-multi-select/AsyncMultiSelectActions.vue",
+      "content": "<script setup lang=\"ts\">\nimport { ArrowDown, ArrowUp, CheckSquare, CheckSquare2 } from 'lucide-vue-next'\nimport { Button } from '@/components/ui/button'\n\nconst { selected, marked } = defineProps<{\n  selected: number\n  marked: boolean\n}>()\n\nconst emit = defineEmits<{\n  (e: 'mark', value: boolean): void\n}>()\n\nconst open = defineModel<boolean>({\n  default: false,\n})\n</script>\n\n<template>\n  <div class=\"absolute top-1 right-1 flex flex-col items-center justify-center gap-1\">\n    <Button v-if=\"selected > 1\" size=\"icon-xs\" @click=\"() => open = !open\">\n      <component :is=\"open ? ArrowUp : ArrowDown\" class=\"text-primary-foreground cursor-pointer\" />\n    </Button>\n    <Button v-if=\"open && selected > 2\" size=\"icon-xs\" class=\"text-xs text-primary-foreground/70 px-1\">\n      {{ selected }}\n    </Button>\n    <Button v-if=\"open && selected > 3\" size=\"icon-xs\" class=\"text-xs text-primary-foreground/70 p-0.5\" @click=\"emit('mark', !marked)\">\n      <component :is=\"marked ? CheckSquare : CheckSquare2\" class=\"text-primary-foreground cursor-pointer size-3\" />\n    </Button>\n  </div>\n</template>\n",
+      "type": "registry:ui"
+    }
+  ]
+}

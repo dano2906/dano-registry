@@ -4,6 +4,19 @@
   "homepage": "https://dano-registry.vercel.app/",
   "items": [
     {
+      "name": "typhography",
+      "type": "registry:component",
+      "title": "Tipografía",
+      "description": "Un componente para mostrar textos en pantalla con diferentes estilos.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "files": [
+        {
+          "path": "app/registry/typhography/Typography.vue",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "action-button",
       "type": "registry:component",
       "title": "Boton de acción",
@@ -74,14 +87,14 @@
       "title": "Select con posibilidad de seleccionar varias opciones",
       "description": "Select con posibilidad de seleccionar varias opciones.",
       "author": "Danilo León <dlg9806@gmail.com>",
-      "registryDependencies": ["select"],
+      "registryDependencies": ["command", "button", "https://https://dano-registry.vercel.app/r/typhography.json"],
       "files": [
         {
           "path": "app/registry/multi-select/MultiSelect.vue",
           "type": "registry:ui"
         },
         {
-          "path": "app/registry/multi-select/MultiSelectExpand.vue",
+          "path": "app/registry/multi-select/MultiSelectActions.vue",
           "type": "registry:ui"
         },
         {
@@ -95,6 +108,28 @@
         {
           "path": "app/registry/multi-select/useSelection.ts",
           "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "async-multi-select",
+      "type": "registry:component",
+      "title": "Select con posibilidad de seleccionar varias opciones",
+      "description": "Select con posibilidad de seleccionar varias opciones desde una url asíncronamente",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["command", "button", "https://https://dano-registry.vercel.app/r/typhography.json", "https://https://dano-registry.vercel.app/r/loading-swap.json"],
+      "files": [
+        {
+          "path": "app/registry/async-multi-select/AsyncMultiSelect.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/async-multi-select/AsyncMultiSelectValue.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/async-multi-select/AsyncMultiSelectActions.vue",
+          "type": "registry:ui"
         }
       ]
     }

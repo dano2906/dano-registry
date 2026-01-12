@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "app/registry/number-input/NumberInput.vue",
-      "content": "<script setup lang=\"ts\">\nconst { min, max, step, condition } = defineProps<{\n  min?: number\n  max?: number\n  step?: number\n  condition?: (value: number) => boolean\n}>()\n\nconst field = defineModel<number | undefined>({\n  set: (v) => {\n    const value = typeof v === 'number' ? v : Number(v)\n    if (Number.isNaN(value))\n      return undefined\n    if (typeof min === 'number' && value < min)\n      return undefined\n    if (typeof max === 'number' && value > max)\n      return undefined\n    if (condition && !condition(value))\n      return undefined\n    return value\n  },\n})\n</script>\n\n<template>\n  <Input\n    v-model.number=\"field\"\n    type=\"number\"\n    :min\n    :max\n    :step\n  />\n</template>\n",
+      "content": "<script setup lang=\"ts\">\nimport { Input } from '@/components/ui/input'\n\nconst { min, max, step, condition } = defineProps<{\n  min?: number\n  max?: number\n  step?: number\n  condition?: (value: number) => boolean\n}>()\n\nconst field = defineModel<number | undefined>({\n  set: (v) => {\n    const value = typeof v === 'number' ? v : Number(v)\n    if (Number.isNaN(value))\n      return undefined\n    if (typeof min === 'number' && value < min)\n      return undefined\n    if (typeof max === 'number' && value > max)\n      return undefined\n    if (condition && !condition(value))\n      return undefined\n    return value\n  },\n})\n</script>\n\n<template>\n  <Input\n    v-model.number=\"field\"\n    type=\"number\"\n    :min\n    :max\n    :step\n  />\n</template>\n",
       "type": "registry:ui"
     },
     {

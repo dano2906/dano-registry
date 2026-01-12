@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "app/registry/loading-swap/LoadingSwap.vue",
-      "content": "<script setup lang=\"ts\">\ninterface Props {\n  isLoading: boolean\n  className?: string\n}\n\nconst { isLoading, className } = defineProps<Props>()\n\nconst contentClasses = computed(() => [\n  'col-start-1 col-end-2 row-start-1 row-end-2 w-full',\n  isLoading ? 'invisible' : 'visible',\n  className,\n])\n\nconst loaderClasses = computed(() => [\n  'col-start-1 col-end-2 row-start-1 row-end-2',\n  isLoading ? 'visible' : 'invisible',\n  className,\n])\n</script>\n\n<template>\n  <div class=\"grid grid-cols-1 items-center justify-items-center\">\n    <div :class=\"contentClasses\">\n      <slot />\n    </div>\n\n    <div :class=\"loaderClasses\">\n      <Spinner />\n    </div>\n  </div>\n</template>\n",
+      "content": "<script setup lang=\"ts\">\nimport { Spinner } from '@/components/ui/spinner'\n\ninterface Props {\n  isLoading: boolean\n  className?: string\n}\n\nconst { isLoading, className } = defineProps<Props>()\n\nconst contentClasses = computed(() => [\n  'col-start-1 col-end-2 row-start-1 row-end-2 w-full',\n  isLoading ? 'invisible' : 'visible',\n  className,\n])\n\nconst loaderClasses = computed(() => [\n  'col-start-1 col-end-2 row-start-1 row-end-2',\n  isLoading ? 'visible' : 'invisible',\n  className,\n])\n</script>\n\n<template>\n  <div class=\"grid grid-cols-1 items-center justify-items-center\">\n    <div :class=\"contentClasses\">\n      <slot />\n    </div>\n\n    <div :class=\"loaderClasses\">\n      <Spinner />\n    </div>\n  </div>\n</template>\n",
       "type": "registry:ui"
     }
   ]

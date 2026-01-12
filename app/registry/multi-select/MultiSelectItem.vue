@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Check } from 'lucide-vue-next'
+import Typography from '@/registry/typhography/Typography.vue'
+import CommandItem from '~/components/ui/command/CommandItem.vue'
 
 const { item, checked } = defineProps<{
   item: MultiSelectItemProp
@@ -14,6 +16,6 @@ const emit = defineEmits<{
 <template>
   <CommandItem :key="item.value" :value="item.value" class="min-h-7" @select="emit('select', item.value)">
     <Check v-if="checked" class="text-muted-foreground" />
-    <PartialsTypography variant="span" :text="item.text" :class="[checked ? 'ml-0' : 'ml-6']" />
+    <Typography variant="span" :text="item.text" :class="[checked ? 'ml-0' : 'ml-6']" />
   </CommandItem>
 </template>

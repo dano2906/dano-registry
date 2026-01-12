@@ -2,7 +2,8 @@
 ✅ Password input
 ✅ Loading Swap
 ✅ Number input
-⏱️ Multiselect
+✅ Multiselect
+✅ Async Multiselect
 ⏱️ Phone input
 ⏱️File upload component with dropzone
 ⏱️Currency selector

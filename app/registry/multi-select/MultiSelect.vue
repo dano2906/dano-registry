@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import type { MultiSelectDataProp } from '~~/shared/types/app'
+import { Command, CommandEmpty, CommandInput, CommandList } from '@/components/ui/command'
+import Typography from '@/registry/typhography/Typography.vue'
+import MultiSelectActions from './MultiSelectActions.vue'
+import MultiSelectItem from './MultiSelectItem.vue'
+import MultiSelectValue from './MultiSelectValue.vue'
 import { useSelection } from './useSelection'
 
 const { data, config = {
@@ -22,6 +27,16 @@ const field = defineModel<string[]>({
 const { onSelect, onRemove, selected, initial } = useSelection(data)
 
 const expanded = ref(false)
+const isAllSelected = computed(() => selected.value.length === initial.value.flatMap(group => group.items).length)
+
+function onMark(mark: boolean) {
+  if (mark === true) {
+    selected.value = initial.value.flatMap(group => group.items)
+  }
+  else {
+    selected.value = []
+  }
+}
 
 watchEffect(() => {
   field.value = selected.value.map(item => item.value)
@@ -29,40 +44,38 @@ watchEffect(() => {
 </script>
 
 <template>
-  <LoadingSwap :is-loading="false">
-    <Command class="rounded-sm">
-      <div class="w-full py-1.5 relative px-2 border-b border-primary-foreground/10 flex items-center justify-start gap-2 flex-wrap" :class="[expanded ? 'max-h-auto' : 'max-h-9 overflow-hidden']">
-        <template v-if="selected.length > 1">
-          <MultiSelectValue v-for="(item, index) in selected" :key="index" :item="item" :on-remove="onRemove">
-            {{ item.value }}
-          </MultiSelectValue>
-          <MultiSelectExpand v-model="expanded" />
-        </template>
-        <template v-else-if="selected.length === 1">
-          <MultiSelectValue :item="selected[0] as MultiSelectItemProp" :on-remove="onRemove">
-            {{ selected[0]?.value }}
-          </MultiSelectValue>
-        </template>
-        <template v-else>
-          <div>
-            <PartialsTypography variant="span" :text="config.emptyMessage" />
-          </div>
-        </template>
-      </div>
-      <CommandInput :placeholder="config.searchPlaceholder" class="w-full" />
-      <CommandList>
-        <CommandEmpty>{{ config.emptySearchMessage }}</CommandEmpty>
-        <CommandGroup v-for="(group, index) in initial" :key="index" :heading="group.heading" class="space-y-1">
-          <MultiSelectItem
-            v-for="item in group.items"
-            :key="item.value"
-            :items="group.items"
-            :item
-            :checked="selected.some(badge => badge.value === item.value)"
-            @select="onSelect"
-          />
-        </CommandGroup>
-      </CommandList>
-    </Command>
-  </LoadingSwap>
+  <Command class="rounded-sm">
+    <div class="w-full py-1.5 relative px-2 border-b border-primary-foreground/10 flex items-center justify-start gap-2 flex-wrap" :class="[expanded ? 'max-h-auto' : 'max-h-9 overflow-hidden']">
+      <template v-if="selected.length > 1">
+        <MultiSelectValue v-for="(item, index) in selected" :key="index" :item="item" :on-remove="onRemove">
+          {{ item.value }}
+        </MultiSelectValue>
+        <MultiSelectActions v-model="expanded" :selected="selected.length" :marked="isAllSelected" @mark="onMark" />
+      </template>
+      <template v-else-if="selected.length === 1">
+        <MultiSelectValue :item="selected[0] as MultiSelectItemProp" :on-remove="onRemove">
+          {{ selected[0]?.value }}
+        </MultiSelectValue>
+      </template>
+      <template v-else>
+        <div>
+          <Typography variant="span" :text="config.emptyMessage" />
+        </div>
+      </template>
+    </div>
+    <CommandInput :placeholder="config.searchPlaceholder" class="w-full" />
+    <CommandList>
+      <CommandEmpty>{{ config.emptySearchMessage }}</CommandEmpty>
+      <CommandGroup v-for="(group, index) in initial" :key="index" :heading="group.heading" class="space-y-1">
+        <MultiSelectItem
+          v-for="item in group.items"
+          :key="item.value"
+          :items="group.items"
+          :item
+          :checked="selected.some(badge => badge.value === item.value)"
+          @select="onSelect"
+        />
+      </CommandGroup>
+    </CommandList>
+  </Command>
 </template>
