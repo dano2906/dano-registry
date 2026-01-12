@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import Typography from '~/registry/typhography/Typography.vue'
+
 const isLoading = ref(false)
 
 async function action() {

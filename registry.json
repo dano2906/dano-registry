@@ -132,6 +132,20 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "tel-input",
+      "type": "registry:component",
+      "title": "Tel Input",
+      "description": "Componente para seleccionar números telefónicos.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["input", "button"],
+      "files": [
+        {
+          "path": "app/registry/tel-input/TelInput.vue",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

@@ -13,5 +13,6 @@ definePageMeta({
     <SectionsLoadingSwap />
     <SectionsNumberInput />
     <SectionsMultiSelect />
+    <SectionsTelInput />
   </main>
 </template>

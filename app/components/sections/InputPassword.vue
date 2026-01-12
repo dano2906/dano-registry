@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import InputPassword from '~/registry/input-password/InputPassword.vue'
+import Typography from '~/registry/typhography/Typography.vue'
 
 const pass = ref('')
 
