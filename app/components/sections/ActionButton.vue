@@ -29,7 +29,7 @@ const registryDependencies = [
       <div class="flex flex-wrap items-center justify-start gap-0.5">
         <ActionButton :action="actionError" require-are-you-sure>
           <template #text>
-            With Dialog with Error
+            Ventana con error
           </template>
           <template #icon>
             <Plus />
@@ -37,7 +37,7 @@ const registryDependencies = [
         </ActionButton>
         <ActionButton :action="actionSuccess" require-are-you-sure>
           <template #text>
-            With Dialog without Error
+            Ventana sin error
           </template>
           <template #icon>
             <Plus />
@@ -45,7 +45,7 @@ const registryDependencies = [
         </ActionButton>
         <ActionButton :action="actionError">
           <template #text>
-            Without Dialog with Error
+            Sin ventana y con error
           </template>
           <template #icon>
             <Plus />
@@ -53,7 +53,7 @@ const registryDependencies = [
         </ActionButton>
         <ActionButton :action="actionSuccess">
           <template #text>
-            Without Dialog without Error
+            Sin ventana y con error
           </template>
           <template #icon>
             <Plus />

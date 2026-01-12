@@ -23,6 +23,8 @@ interface Props<T extends ActionResult = ActionResult> {
     position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
   }
   dialogOptions?: {
+    title?: string
+    description?: string
     cancelButtonText?: string
     confirmButtonText?: string
   }
@@ -36,6 +38,8 @@ const {
     position: 'bottom-right',
   },
   dialogOptions = {
+    title: '¿Está seguro que desea realizar esta acción?',
+    description: 'Esta acción no se puede deshacer.',
     cancelButtonText: 'Cancelar',
     confirmButtonText: 'Confirmar',
   },
@@ -58,10 +62,9 @@ const { isLoading, openDialog, onPrimaryClick, onConfirm, onCancel }
   <Dialog v-model:open="openDialog">
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Are you absolutely sure?</DialogTitle>
+        <DialogTitle>{{ dialogOptions?.title ?? "¿Está seguro que desea realizar esta acción?" }}</DialogTitle>
         <DialogDescription>
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
+          {{ dialogOptions?.description ?? "Esta acción no se puede deshacer." }}
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>

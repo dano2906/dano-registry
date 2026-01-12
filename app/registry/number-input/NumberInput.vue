@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Input } from '@/components/ui/input'
+
 const { min, max, step, condition } = defineProps<{
   min?: number
   max?: number

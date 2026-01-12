@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Spinner } from '@/components/ui/spinner'
+
 interface Props {
   isLoading: boolean
   className?: string

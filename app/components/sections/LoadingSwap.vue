@@ -13,7 +13,7 @@ const registryDependencies = [
 </script>
 
 <template>
-  <PartialsSection component-name="loading-swap" description="Envoltorio para manejar estados de carga sin cambiar las dimensiones del componente." title="Loading Swap" :registry-dependencies>
+  <PartialsSection id="#loading-swap" component-name="loading-swap" description="Envoltorio para manejar estados de carga sin cambiar las dimensiones del componente." title="Loading Swap" :registry-dependencies>
     <template #example>
       <div class="flex flex-col flex-wrap items-start justify-start gap-2">
         <Button @click="action">
@@ -23,7 +23,7 @@ const registryDependencies = [
         </Button>
         <div class="w-full h-24 bg-secondary text-primary rounded-lg grid place-content-center">
           <LoadingSwap :is-loading="isLoading">
-            <PartialsTypography variant="span" text="Loading Swap" />
+            <Typography variant="span" text="Loading Swap" />
           </LoadingSwap>
         </div>
       </div>

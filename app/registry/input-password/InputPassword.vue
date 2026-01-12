@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Eye, EyeClosed } from 'lucide-vue-next'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group'
 
 const { placeholder } = defineProps<{
   placeholder?: string | undefined

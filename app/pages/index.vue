@@ -7,6 +7,7 @@ definePageMeta({
 
 <template>
   <main class="w-full py-4 space-y-14">
+    <SectionsTypography />
     <SectionsActionButton />
     <SectionsInputPassword />
     <SectionsLoadingSwap />
