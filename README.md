@@ -4,7 +4,7 @@
 ✅ Number input 
 ✅ Multiselect + Async Multiselect
 ✅ Phone input 0.2 
-⏱️ File upload component with dropzone
+✅ File upload component with dropzone
 ⏱️ Currency selector 
 ⏱️ Currency input 0.3
 ⏱️ Credit card

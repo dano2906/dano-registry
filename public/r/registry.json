@@ -146,6 +146,28 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "file-input",
+      "type": "registry:component",
+      "title": "File Input",
+      "description": "Componente para subir archivos",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "app/registry/file-input/FileInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "app/registry/file-input/file-input.d.ts",
+          "type": "registry:hook"
+        },
+        {
+          "path": "app/registry/file-input/useFileInput.ts",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }
