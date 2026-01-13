@@ -1,0 +1,20 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "currency-selector",
+  "type": "registry:component",
+  "title": "Selector de monedas",
+  "author": "Danilo León <dlg9806@gmail.com>",
+  "description": "Componente para seleccionar monedas con manejo de idiomas.",
+  "registryDependencies": [
+    "command",
+    "button",
+    "popover"
+  ],
+  "files": [
+    {
+      "path": "app/registry/currency-selector/CurrencySelector.vue",
+      "content": "<script setup lang=\"ts\">\nimport { data } from 'currency-codes'\nimport { CheckIcon, ChevronsUpDownIcon } from 'lucide-vue-next'\nimport { ref } from 'vue'\nimport { Button } from '@/components/ui/button'\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from '@/components/ui/command'\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from '@/components/ui/popover'\n\nconst { lang = 'es-ES', config = {\n  placeholder: 'Seleccione una moneda',\n  searchPlaceholder: 'Buscar una moneda',\n  emptyState: 'No hay monedas disponibles',\n} } = defineProps<{\n  lang?: string\n  config?: {\n    placeholder?: string\n    searchPlaceholder?: string\n    emptyState?: string\n  }\n}>()\n\nconst model = defineModel()\n\nconst open = ref(false)\nconst currencyNames = new Intl.DisplayNames([lang], { type: 'currency' })\n\nfunction capitalizeFirstLetter(str: string | undefined): string {\n  if (!str)\n    return ''\n  return str.charAt(0).toUpperCase() + str.slice(1)\n}\n\nfunction getSymbol(code: string): string | undefined {\n  const symbol = new Intl.NumberFormat(lang, {\n    style: 'currency',\n    currency: code,\n  }).formatToParts(0).find(part => part.type === 'currency')?.value\n  return symbol?.length === 1 ? `(${symbol})` : ''\n}\n</script>\n\n<template>\n  <Popover v-model:open=\"open\">\n    <PopoverTrigger as-child>\n      <Button\n        variant=\"outline\"\n        role=\"combobox\"\n        :aria-expanded=\"open\"\n        class=\"w-full max-w-xs justify-between\"\n      >\n        <span class=\"truncate font-semibold\">{{\n          model\n            ? capitalizeFirstLetter(currencyNames.of(model))\n            : config.placeholder\n        }}</span>\n        <ChevronsUpDownIcon class=\"ml-2 h-4 w-4 shrink-0 opacity-50\" />\n      </Button>\n    </PopoverTrigger>\n    <PopoverContent class=\"w-full max-w-sm p-0\">\n      <Command>\n        <CommandInput :placeholder=\"config.searchPlaceholder\" />\n        <CommandList>\n          <CommandEmpty>{{ config.emptyState }}</CommandEmpty>\n          <CommandGroup>\n            <CommandItem\n              v-for=\"c in data\"\n              :key=\"c.currency\"\n              :value=\"c.code\"\n              @select=\"() => {\n                model = c.code\n                open = false\n              }\"\n            >\n              <CheckIcon\n                :class=\"cn(\n                  'mr-2 h-4 w-4',\n                  model === c.code ? 'opacity-100' : 'opacity-0',\n                )\"\n              />\n              <span class=\"text-sm font-semibold\">{{ getSymbol(c.code) }} {{ capitalizeFirstLetter(currencyNames.of(c.code)) }}</span>\n            </CommandItem>\n          </CommandGroup>\n        </CommandList>\n      </Command>\n    </PopoverContent>\n  </Popover>\n</template>\n",
+      "type": "registry:ui"
+    }
+  ]
+}

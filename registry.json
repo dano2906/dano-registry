@@ -168,6 +168,20 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "currency-selector",
+      "type": "registry:component",
+      "title": "Selector de monedas",
+      "description": "Componente para seleccionar monedas con manejo de idiomas.",
+      "author": "Danilo León <dlg9806@gmail.com>",
+      "registryDependencies": ["command", "button", "popover"],
+      "files": [
+        {
+          "path": "app/registry/currency-selector/CurrencySelector.vue",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
