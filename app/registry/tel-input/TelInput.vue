@@ -123,7 +123,7 @@ function selectCountry(c: Country) {
 
     <div
       v-if="open"
-      class="absolute bg-secondary/50 z-50 mt-2 w-full rounded-sm shadow-xl"
+      class="absolute bg-secondary z-50 mt-2 w-full rounded-sm shadow-xl"
     >
       <div class="p-2">
         <Input
